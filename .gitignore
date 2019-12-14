@@ -1,0 +1,7 @@
+links.txt
+old.txt
+.env
+note.md
+files
+tests/__pycache__
+tests/downloaders/__pycache__
