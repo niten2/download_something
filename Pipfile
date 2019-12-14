@@ -13,6 +13,7 @@ requests = "*"
 clint = "*"
 pytest = "*"
 python-dotenv = "*"
+youtube-dl = "*"
 
 [requires]
 python_version = "3.8"

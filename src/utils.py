@@ -7,8 +7,10 @@ class Utils:
 
 		def func_wrapp(*args):
 			spinner.start()
-			fn(*args)
+			res = fn(*args)
 			spinner.stop()
+			return res
+
 		return func_wrapp
 
 	def is_downloadable(self, url):

@@ -1,29 +1,26 @@
 from pytube import Playlist
-from src.utils import spinner
+from src.utils import utils
+from src.file_service import file_service
 
-# TODO
 class YoutubePlaylist:
-	def isType(self, url):
-		return "youtube" in url and "list" in url
+    def is_type(self, url):
+        return "youtube" in url and "list" in url
 
-	def process(link):
-		videos = self.__get_links(link)
+    def process(self, link, dir):
+        res = self._get_links(link, dir)
+        file_service.remove_link(link)
+        file_service.append_lines(res)
 
-		for video in videos:
-			fileService.append_link(video + ',' + dir_name)
+    @utils.spinner
+    def _get_links(self, url, dir):
+        pl = Playlist(url, True)
+        links = pl.parse_links()
+        array = []
 
-	@spinner
-	def _get_links(self, url, dir):
-		pl = Playlist(url, True)
-		links = pl.parse_links()
-		array = []
+        for link in links:
+            url = ('https://www.youtube.com/' + link + ", " + dir)
+            array.append(url)
 
-		for link in links:
-			array.append(['https://www.youtube.com/' + link, dir])
+        return "\n".join(array)
 
-		return array
-
-		# full_path = PATH + dir
-		# files.create_dir(full_path)
-
-Youtube_playlist = YoutubePlaylist()
+youtube_playlist = YoutubePlaylist()

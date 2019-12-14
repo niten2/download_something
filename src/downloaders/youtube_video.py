@@ -1,5 +1,4 @@
 from pytube import YouTube
-
 from src.utils import utils
 from src.settings import VIDEO_PATH
 from src.file_service import file_service
