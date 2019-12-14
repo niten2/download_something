@@ -7,26 +7,33 @@ from src.downloaders.youtube_video import youtube_video
 from src.downloaders.youtube_playlist import youtube_playlist
 
 class Downloader:
-	def run(self, lines):
-		for line in lines:
-			try:
-				self._execute(line[0], line[1], line[2])
-			except Exception as e:
-				logger.warning(line[0], str(e))
+    def run(self, lines):
+        for line in lines:
+            try:
+                self._execute(line[0], line[1], line[2])
+            except Exception as e:
+                logger.warning(line[0], str(e))
 
-	def _execute(self, url, dir_name, flag):
-		if youtube_playlist.is_type(url):
-			youtube_playlist.process(url, dir_name)
-		elif git.is_type(url):
-			git.download(url)
-		elif youtube_video.is_type(url):
-			youtube_video.download(url)
-		elif youtube_mp3.is_type(url, flag):
-			youtube_mp3.download(url)
-		else:
-			wget.download(url)
+    def _execute(self, url, dir_name, flag):
+        print(url, dir_name, flag)
 
-		file_service.remove_link(url)
-		logger.warning('download url ' + url)
+        if youtube_playlist.is_type(url, flag):
+            logger.warning('youtube_playlist ' + url)
+            youtube_playlist.process(url, dir_name)
+        elif git.is_type(url):
+            logger.warning('git ' + url)
+            git.download(url)
+        elif youtube_video.is_type(url):
+            logger.warning('youtube video ' + url)
+            youtube_video.download(url)
+        elif youtube_mp3.is_type(url, flag):
+            logger.warning('youtube video mp3 ' + url)
+            youtube_mp3.download(url)
+        else:
+            logger.warning('wget download ' + url)
+            wget.download(url)
+
+        file_service.remove_link(url)
+        logger.warning('download url ' + url)
 
 downloader = Downloader()

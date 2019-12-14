@@ -3,8 +3,8 @@ from src.utils import utils
 from src.file_service import file_service
 
 class YoutubePlaylist:
-    def is_type(self, url):
-        return "youtube" in url and "list" in url
+    def is_type(self, url, flag):
+        return "youtube" in url and "list" in url in flag == "list"
 
     def process(self, link, dir):
         res = self._get_links(link, dir)
