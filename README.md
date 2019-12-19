@@ -20,7 +20,7 @@ log_path=/home/{{user}}/_test/log.txt
 ```
 https://www.youtube.com/watch?v=FCSAqFE1avk, go
 https://www.youtube.com/watch?v=FCSAqFE1avk, go, mp3
-https://www.youtube.com/playlist?list=PLrCZzMib1e9q-X5V9pTM6J0AemRWseM7I, go-techno
+https://www.youtube.com/playlist?list=PLrCZzMib1e9q-X5V9pTM6J0AemRWseM7I, golang, playlist
 http://temp-cdn.datalock.ru/filename.mp4, some-dir
 https://github.com/ema2159/centaur-tabs, git-dir
 ```
