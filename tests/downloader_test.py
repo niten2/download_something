@@ -1,13 +1,6 @@
-from src.downloader import Downloader
+from src.downloader import downloader
 
-downloader = Downloader()
-
-class TestClass:
-    def test_run(self):
-        links = [
-			''
-		]
-
-		downloader.run(links)
-
-        assert True == True
+class TestDownloader:
+    def test_process(self):
+        downloader.process()
+        assert 1 == 1

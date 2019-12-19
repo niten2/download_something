@@ -8,7 +8,6 @@ class TestYouTubeMp3:
     def test_is_type_wrong_params_given(self):
         youtube_mp3.is_type('test', 'mp3') == False
 
-	# TODO
-    # def test_download(self):
-    #     youtube_video.download(youtube_video_url)
-    #     assert 1 == 1
+    def test_download(self):
+        youtube_video.download(youtube_video_url)
+        assert 1 == 1
