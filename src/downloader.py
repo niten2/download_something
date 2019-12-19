@@ -6,34 +6,47 @@ from src.downloaders.youtube_mp3 import youtube_mp3
 from src.downloaders.youtube_video import youtube_video
 from src.downloaders.youtube_playlist import youtube_playlist
 
+def get_log_string(prefix, url, dir=' ', flag=' '):
+    return prefix + ' ' + url + ', ' + dir + ', ' + flag
+
 class Downloader:
-    def run(self, lines):
-        for line in lines:
-            try:
-                self._execute(line[0], line[1], line[2])
-            except Exception as e:
-                logger.warning(line[0], str(e))
+    def process(self):
+        link = file_service.get_link()
 
-    def _execute(self, url, dir_name, flag):
-        print(url, dir_name, flag)
+        if not link:
+            return False
 
-        if youtube_playlist.is_type(url, flag):
-            logger.warning('youtube_playlist ' + url)
-            youtube_playlist.process(url, dir_name)
-        elif git.is_type(url):
-            logger.warning('git ' + url)
-            git.download(url)
-        elif youtube_video.is_type(url):
-            logger.warning('youtube video ' + url)
-            youtube_video.download(url)
-        elif youtube_mp3.is_type(url, flag):
-            logger.warning('youtube video mp3 ' + url)
-            youtube_mp3.download(url)
-        else:
-            logger.warning('wget download ' + url)
-            wget.download(url)
+        url = link['url']
+        dir = link['dir']
+        flag = link['flag']
 
-        file_service.remove_link(url)
-        logger.warning('download url ' + url)
+        print('process', url, dir, flag)
+
+        try:
+            if youtube_playlist.is_type(url, flag):
+                logger.info('ACTION youtube_playlist ' + url)
+                urls = youtube_playlist.process(url, dir)
+                if len(urls):
+                    file_service.append_lines(urls)
+            elif git.is_type(url):
+                logger.info('ACTION git ' + url)
+                git.download(url)
+            elif youtube_video.is_type(url):
+                logger.info('ACTION youtube video ' + url)
+                youtube_video.download(url, dir)
+            elif youtube_mp3.is_type(url, flag):
+                logger.info('ACTION youtube video mp3 ' + url)
+                youtube_mp3.download(url)
+            else:
+                logger.info('ACTION wget download ' + url)
+                wget.download(url)
+
+            logger.warning(get_log_string('REMOVE LINK:', url, dir, flag))
+            file_service.remove_link(url)
+        except Exception as e:
+            logger.warning(get_log_string('REMOVE LINK ' + str(e) + ' :', url, dir, flag))
+            file_service.remove_link(url)
+
+        return True
 
 downloader = Downloader()

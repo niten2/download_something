@@ -1,7 +1,7 @@
 #!/bin/python
-from src.file_service import file_service
+# pipenv run python ./main.py
 from src.downloader import downloader
 
 if __name__ == '__main__':
-	links = file_service.get_links()
-	downloader.run(links)
+    while downloader.process():
+        print('\n------------\n')

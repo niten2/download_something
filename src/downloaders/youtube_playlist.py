@@ -1,24 +1,20 @@
 from pytube import Playlist
 from src.utils import utils
 from src.file_service import file_service
+from src.settings import DEFAULT_DIR
 
 class YoutubePlaylist:
-    def is_type(self, url, flag):
-        return "youtube" in url and "list" in url in flag == "list"
-
-    def process(self, link, dir):
-        res = self._get_links(link, dir)
-        file_service.remove_link(link)
-        file_service.append_lines(res)
+    def is_type(self, url, flag=""):
+        return "youtube" in url and "list" in url and flag == "playlist"
 
     @utils.spinner
-    def _get_links(self, url, dir):
+    def process(self, url, dir=DEFAULT_DIR):
         pl = Playlist(url, True)
         links = pl.parse_links()
         array = []
 
         for link in links:
-            url = ('https://www.youtube.com/' + link + ", " + dir)
+            url = ('https://www.youtube.com' + link + ", " + dir)
             array.append(url)
 
         return "\n".join(array)
