@@ -41,7 +41,7 @@ class Downloader:
                 logger.info('ACTION wget download ' + url)
                 wget.download(url)
 
-            logger.warning(get_log_string('REMOVE LINK:', url, dir, flag))
+            logger.warning(get_log_string('DOWNLOAD LINK:', url, dir, flag))
             file_service.remove_link(url)
         except Exception as e:
             logger.warning(get_log_string('REMOVE LINK ' + str(e) + ' :', url, dir, flag))
