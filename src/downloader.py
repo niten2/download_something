@@ -44,6 +44,14 @@ class Downloader:
             logger.warning(get_log_string('DOWNLOAD LINK:', url, dir, flag))
             file_service.remove_link(url)
         except Exception as e:
+            if "Too Many Requests" in str(e):
+                logger.warning(get_log_string(str(e) + ' :', url, dir, flag))
+                return
+
+            if "url_encoded_fmt_stream_map" in str(e):
+                logger.warning(get_log_string(str(e) + ' :', url, dir, flag))
+                return
+
             logger.warning(get_log_string('REMOVE LINK ' + str(e) + ' :', url, dir, flag))
             file_service.remove_link(url)
 
