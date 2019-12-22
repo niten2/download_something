@@ -8,7 +8,12 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--count', help='count links')
     args = parser.parse_args()
-    count = args.count or 'all'
+
+    if not args.count:
+        args.count = 'all'
+
+    return args
+
 
 args = get_args()
 
