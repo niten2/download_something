@@ -24,8 +24,10 @@ https://www.youtube.com/playlist?list=PLrCZzMib1e9q-X5V9pTM6J0AemRWseM7I, golang
 http://temp-cdn.datalock.ru/filename.mp4, some-dir
 https://github.com/ema2159/centaur-tabs, git-dir
 ```
-- run `pipenv run python ./main.py`
-- you can add alias or crone tack
+
+## run ##
+- `pipenv run python ./main.py` - process all links
+- `pipenv run python ./main.py --count=one` - process one link
 
 # tests #
 
