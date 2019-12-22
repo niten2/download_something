@@ -3,5 +3,7 @@ old.txt
 .env
 note.md
 files
+
+src/__pycache__
 tests/__pycache__
 tests/downloaders/__pycache__
