@@ -11,9 +11,10 @@ class YoutubeVideo:
     def download(self, url, dir='other'):
         full_path = VIDEO_PATH + dir + '/'
         file_service.create_dir(full_path)
+
         ydl_opts = {
-            'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4',
-            'outtmpl': full_path + '/%(title)s.%(ext)s',
+            'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+            'outtmpl': full_path + '%(title)s.%(ext)s',
         }
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
