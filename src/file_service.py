@@ -8,18 +8,16 @@ class FileService:
             os.makedirs(path)
 
     def get_link(self):
-        lines = self._get_lines(self._read_file())
-
-        return lines[0]
+        lines = self._get_lines()
+        return lines[0] if len(lines) > 0 else None
 
     def append_lines(self, lines=''):
         res = self._read_file()
         res = res + "\n" + lines
-
         self._save_file(res)
 
     def remove_link(self, url):
-        lines = self._get_lines(self._read_file())
+        lines = self._get_lines()
         lines = list(filter(lambda x: x['url'] != url, lines))
         lines = list(map(lambda x: list(x.values()), lines))
         lines = list(map(lambda x: ", ".join(x), lines))
@@ -32,13 +30,13 @@ class FileService:
         lines = file.read()
         file.close()
 
-        return lines or []
+        return lines or ''
 
     def _save_file(self, res):
         with open(LINKS_PATH, 'w') as f:
             f.write(res)
 
-    def _get_lines(self, lines=''):
+    def _get_lines(self):
         def split(link):
             res = link.split(',')
             url = res[0].strip()
@@ -47,6 +45,7 @@ class FileService:
 
             return dict(url=url, dir=dir, flag=flag)
 
+        lines = self._read_file()
         lines = lines.split('\n')
         lines = list(filter(lambda x: x != '', lines))
         lines = list(filter(lambda x: x.find("TODO") == -1, lines))
