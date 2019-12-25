@@ -44,13 +44,18 @@ class Downloader:
             logger.warning(get_log_string('DOWNLOAD LINK:', url, dir, flag))
             file_service.remove_link(url)
         except Exception as e:
+            # TODO refactoring
             if "Too Many Requests" in str(e):
                 logger.warning(get_log_string(str(e) + ' :', url, dir, flag))
-                return
+                return False
 
             if "url_encoded_fmt_stream_map" in str(e):
                 logger.warning(get_log_string(str(e) + ' :', url, dir, flag))
-                return
+                return False
+
+            if "Temporary failure in name resolution" in str(e):
+                logger.warning(get_log_string(str(e) + ' :', url, dir, flag))
+                return False
 
             logger.warning(get_log_string('REMOVE LINK ' + str(e) + ' :', url, dir, flag))
             file_service.remove_link(url)
