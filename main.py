@@ -4,6 +4,7 @@
 import argparse
 from src.downloader import downloader
 
+
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--count', help='count links')

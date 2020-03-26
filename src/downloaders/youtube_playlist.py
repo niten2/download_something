@@ -1,7 +1,8 @@
 from pytube import Playlist
 from src.utils import utils
-from src.file_service import file_service
 from src.settings import DEFAULT_DIR
+# from src.file_service import file_service
+
 
 class YoutubePlaylist:
     def is_type(self, url, flag=""):
@@ -18,5 +19,6 @@ class YoutubePlaylist:
             array.append(url)
 
         return "\n".join(array)
+
 
 youtube_playlist = YoutubePlaylist()

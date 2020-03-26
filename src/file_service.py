@@ -2,6 +2,7 @@ import os
 import re
 from src.settings import LINKS_PATH
 
+
 class FileService:
     def create_dir(self, path):
         if not os.path.exists(path):
@@ -38,12 +39,13 @@ class FileService:
 
     def _get_lines(self):
         def split(link):
-            res = link.split(',')
+            res = re.split(r'(?=\,\s)+', link)
             url = res[0].strip()
-            dir = res[1].strip() if 1 < len(res) else 'other'
-            flag = res[2].strip() if 2 < len(res) else ''
+            dir = res[1].replace(',', '').strip() if 1 < len(res) else 'other'
+            flag = res[2].replace(',', '').strip() if 2 < len(res) else ''
+            name = res[3].replace(',', '').strip() if 3 < len(res) else ''
 
-            return dict(url=url, dir=dir, flag=flag)
+            return dict(url=url, dir=dir, flag=flag, name=name)
 
         lines = self._read_file()
         lines = lines.split('\n')
@@ -52,5 +54,6 @@ class FileService:
         lines = list(map(lambda x: split(x), lines))
 
         return lines
+
 
 file_service = FileService()

@@ -11,6 +11,7 @@ VIDEO_PATH = os.getenv("video_path")
 
 LINKS_PATH = os.getenv("links_path")
 LOG_PATH = os.getenv("log_path")
+VIMEO_PATH = os.getenv("vimeo_path")
 
 DEFAULT_DIR = 'other'
 PLAYLIST_FLAG = 'playlist'
