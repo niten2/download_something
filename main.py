@@ -1,8 +1,7 @@
 #!/bin/python
-# pipenv run python ./main.py --count=all
-# pipenv run python ./main.py --count=one
 import argparse
 from src.downloader import downloader
+
 
 def get_args():
     parser = argparse.ArgumentParser()

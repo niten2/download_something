@@ -3,6 +3,7 @@ from src.utils import utils
 from src.settings import VIDEO_PATH
 from src.file_service import file_service
 
+
 class YoutubeVideo:
     def is_type(self, url):
         return "youtube" in url
@@ -11,5 +12,6 @@ class YoutubeVideo:
         full_path = VIDEO_PATH + dir + '/'
         file_service.create_dir(full_path)
         YouTube(url).streams.first().download(full_path)
+
 
 youtube_video = YoutubeVideo()

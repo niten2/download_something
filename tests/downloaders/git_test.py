@@ -1,6 +1,7 @@
 from src.downloaders.git import git
 from tests.fixtures.links import git_url
 
+
 class TestGit:
     def test_is_type_valid_params_given(self):
         assert git.is_type(git_url) == True

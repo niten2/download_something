@@ -3,6 +3,7 @@ from src.utils import utils
 from src.file_service import file_service
 from src.settings import DEFAULT_DIR
 
+
 class YoutubePlaylist:
     def is_type(self, url, flag=""):
         return "youtube" in url and "list" in url and flag == "playlist"
@@ -18,5 +19,6 @@ class YoutubePlaylist:
             array.append(url)
 
         return "\n".join(array)
+
 
 youtube_playlist = YoutubePlaylist()

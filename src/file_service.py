@@ -2,6 +2,7 @@ import os
 import re
 from src.settings import LINKS_PATH
 
+
 class FileService:
     def create_dir(self, path):
         if not os.path.exists(path):
@@ -53,5 +54,6 @@ class FileService:
         lines = list(map(lambda x: split(x), lines))
 
         return lines
+
 
 file_service = FileService()

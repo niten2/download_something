@@ -6,8 +6,10 @@ from src.downloaders.youtube_mp3 import youtube_mp3
 from src.downloaders.youtube_video import youtube_video
 from src.downloaders.youtube_playlist import youtube_playlist
 
+
 def get_log_string(prefix, url, dir=' ', flag=' '):
     return prefix + ' ' + url + ', ' + dir + ', ' + flag
+
 
 class Downloader:
     def process(self):
@@ -52,9 +54,11 @@ class Downloader:
                 logger.warning(get_log_string(str(e) + ' :', url, dir, flag))
                 return
 
-            logger.warning(get_log_string('REMOVE LINK ' + str(e) + ' :', url, dir, flag))
+            logger.warning(
+                get_log_string('REMOVE LINK ' + str(e) + ' :', url, dir, flag))
             file_service.remove_link(url)
 
         return True
+
 
 downloader = Downloader()
