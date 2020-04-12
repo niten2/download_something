@@ -21,5 +21,7 @@ if __name__ == '__main__':
     if args.count == 'all':
         while downloader.process():
             print('\n------------\n')
+        else:
+            print('\nfinised\n')
     elif args.count == 'one':
         downloader.process()

@@ -1,4 +1,4 @@
-# you can use this app for download something #
+# You can use this app for download: #
 - youtube videos
 - download and convert videos to mp3 from youtube
 - download playlists from youtube
@@ -7,8 +7,8 @@
 
 # setup #
 
-- pipenv install
-- touch .env, for example:
+- make install
+- touch ./.env, for example:
 ```
 git_path=/home/{{user}}/_test/git
 video_path=/home/{{user}}/_test/video
@@ -16,6 +16,7 @@ mp3_path=/home/{{user}}/_test/mp3
 links_path=/home/{{user}}/_test/links.txt
 log_path=/home/{{user}}/_test/log.txt
 ```
+
 - add links to file by links_path, for example:
 ```
 https://www.youtube.com/watch?v=FCSAqFE1avk, go
@@ -31,11 +32,25 @@ https://github.com/ema2159/centaur-tabs, git-dir
 
 # tests #
 
-pipenv run python -m unittest discover
+make tests
 
-# list TODO #
-- app be able configure path - git, mp3, files, youtube_videos
-- app be able download git code
-- app be able download some files
-- app be able download youtube files
-- app be able download youtube like mp3 files
+# TODO #
+- be able configure path - git, mp3, files, youtube_videos
+- be able download git code
+- be able download some files
+- be able download youtube files
+- be able download youtube like mp3 files
+- be able download vimeo
+
+# Youtube get all links from watch later (run in console) #
+```js
+let videos = document.querySelectorAll('.yt-simple-endpoint.style-scope.ytd-playlist-video-renderer');
+var json = []
+videos.forEach(video => {
+  var url = 'https://www.youtube.com' + video.getAttribute('href');
+  url = url.split('&list=WL&index=');
+  url = url[0];
+  json.push(url);
+});
+json.map(j => console.log(j));
+```
